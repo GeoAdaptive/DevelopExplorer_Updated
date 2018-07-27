@@ -1,6 +1,4 @@
 
-
-
 // var map = L.map('map-selpage', {
 //   // center: [-23.617, -56.981],
 //   center: [-10.604, -58.768],

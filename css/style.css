@@ -787,7 +787,7 @@ body {
 .custom-popup .leaflet-popup-tip-container {
   width:3px;
   height:0px;
-  background:#2c3e50;
+  background:#D4E6F1;
   }
 .custom-popup .leaflet-popup-tip {
   border-left:15px solid transparent;
@@ -1002,7 +1002,7 @@ body {
   /* top:8%; */
   top:20%;
   width:80%;
-  left:24%;
+  left:20%;
 }
 
 /* .basemapbar{
@@ -1287,12 +1287,9 @@ section::after {
   -webkit-animation: sdb03 3s infinite;
   animation: sdb03 3s infinite;
   box-sizing: border-box;
-} */
-
+}
 
 /*Here are the other pages*/
-
-
 /* .page1 {
   position:relative;
   width:100%;
@@ -1328,3 +1325,84 @@ section::after {
   border-left:15px solid transparent;
   border-right:15px solid transparent;
   border-top:15px solid #2c3e50;*/
+
+  @import url(http://fonts.googleapis.com/css?family=Raleway);
+  h2.logintitle{
+  background-color: #FEFFED;
+  padding: 30px 35px;
+  margin: -10px -50px;
+  text-align:center;
+  border-radius: 10px 10px 0 0;
+  }
+  hr{
+  margin: 10px -50px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-bottom: 40px;
+  }
+  div.container{
+  width: 900px;
+  height: 610px;
+  margin:35px auto;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  }
+  div.main{
+  width: 300px;
+  padding: 10px 50px 25px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  float:left;
+  margin-top:50px;
+  }
+  input[type=text],input[type=password]{
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  margin-bottom: 25px;
+  margin-top: 5px;
+  border: 2px solid #ccc;
+  color: #D4E6F1;
+  font-size: 16px;
+  border-radius: 5px;
+  }
+  label{
+  color: #464646;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 14px;
+  font-weight: bold;
+  }
+  center{
+  font-size:32px;
+  }
+  .note{
+  color:red;
+  }
+  .valid{
+  color:green;
+  }
+  .back{
+  text-decoration: none;
+  border: 1px solid rgb(0, 143, 255);
+  background-color: rgb(0, 214, 255);
+  padding: 3px 20px;
+  border-radius: 2px;
+  color: black;
+  }
+  input[type=button]{
+  font-size: 16px;
+  background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);
+  border: 1px solid #e5a900;
+  color: #4E4D4B;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 0;
+  outline:none;
+  }
+  input[type=button]:hover{
+  background: linear-gradient(#ffdd7f 5%, #ffbc00 100%);
+  }

@@ -698,46 +698,46 @@ var gapcustomOptions =
 
 //3.4 CREATING THE BASIC GEOSPATIAL DATA
 //DOWNLOAD AND PARSE THE DATA: NATIONAL LEVEL
-$(document).ready(function(){
-  $.ajax(Paraguay_country_boundary).done(function(data){
-    parsedData_Country = JSON.parse(data);
-    console.log(parsedData_Country);
-    console.log("parsed");
-    //SET THE DEFAULT COUNTRY MAP FIRST
-    var defaultboundary = L.geoJson(parsedData_Country,
-      {
-        style: highlightStyle,
-        pointToLayer: function (feature, latlng) {
-          return new L.Polygon(latlng, {
-          });
-        },
-
-        onEachFeature: function(feature,layer){
-          layer.bindPopup(
-            "<b>Name: </b>" +
-            feature.properties.admin +
-            "</br>" +
-
-            "<b>GDP: </b>" +
-            feature.properties.gdp_md_est +
-            "</br>" +
-
-            "<b>Population: </b>" +
-            feature.properties.pop_est +
-            "</br>" +
-
-            "<b>Income level: </b>" +
-            feature.properties.income_grp +
-            "</br>" +
-
-            "</br><button class='btn btn-light my-2 my-sm-0' style='font-size:12px;'>Download Report</button>"
-          )}
-        }).addTo(map);
-        defaultboundary.eachLayer(eachFeatureFunction);
-        Country_boundary.push(defaultboundary);
-        console.log("default country boundary generated.");
-  })
-})
+// $(document).ready(function(){
+//   $.ajax(Paraguay_country_boundary).done(function(data){
+//     parsedData_Country = JSON.parse(data);
+//     console.log(parsedData_Country);
+//     console.log("parsed");
+//     //SET THE DEFAULT COUNTRY MAP FIRST
+//     var defaultboundary = L.geoJson(parsedData_Country,
+//       {
+//         style: highlightStyle,
+//         pointToLayer: function (feature, latlng) {
+//           return new L.Polygon(latlng, {
+//           });
+//         },
+//
+//         onEachFeature: function(feature,layer){
+//           layer.bindPopup(
+//             "<b>Name: </b>" +
+//             feature.properties.admin +
+//             "</br>" +
+//
+//             "<b>GDP: </b>" +
+//             feature.properties.gdp_md_est +
+//             "</br>" +
+//
+//             "<b>Population: </b>" +
+//             feature.properties.pop_est +
+//             "</br>" +
+//
+//             "<b>Income level: </b>" +
+//             feature.properties.income_grp +
+//             "</br>" +
+//
+//             "</br><button class='btn btn-light my-2 my-sm-0' style='font-size:12px;'>Download Report</button>"
+//           )}
+//         }).addTo(map);
+//         defaultboundary.eachLayer(eachFeatureFunction);
+//         Country_boundary.push(defaultboundary);
+//         console.log("default country boundary generated.");
+//   })
+// })
 //DOWNLOAD AND PARSE THE DATA: DEPARTMENT LEVEL
 $(document).ready(function(){
   $.ajax(Paraguay_dep_boundary).done(function(data){
@@ -824,7 +824,7 @@ $(document).ready(function(){
 
             customOptions
 
-          );
+          ).addTo(map);
 
           // layer.bindTooltip("Department").openTooltip();
 
@@ -847,9 +847,7 @@ $(document).ready(function(){
           // });
 
         }
-        })
-
-        ;
+        });
         itemB.eachLayer(eachFeatureFunction);
         // itemB.eachLayer(eachFeature_dep);
         Department_boundary.push(itemB);
