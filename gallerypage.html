@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <title>DevelopExplorer@GeoAdaptive Gallery</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+      integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+      crossorigin=""/>
+    <!--Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+      integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+      crossorigin=""></script>
+    <!--And add this jquery documentation for downloading and parsing data-->
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+    <!-- underscore functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- <script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script> -->
+
+<!-- Add this collapse later back in!!! -->
+    <div class="pos-f-t">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          <h4 class="text-white">Collapsed content</h4>
+          <span class="text-muted">Toggleable via the navbar brand.</span>
+        </div>
+      </div>
+      <!-- <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav> -->
+    </div>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+      <a class="navbar-brand" href="index.html">Develop<span id = "x1">Explorer</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+            <!-- <a class="nav-link" href="#">About</a> -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallerypage.html">Gallery</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Signup</a>
+              <a class="dropdown-item" href="#">Log in</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Not George?</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li> -->
+        </ul>
+
+        <!-- the following is the signup and login areas -->
+        <!-- <div>
+          <button class="btn btn-default dropdown-toggle" type="button" id="loginbutton" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Log in
+          </button>
+          <button class="btn btn-default dropdown-toggle" type="button" id="signupbutton" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Sign up
+          </button>
+          <img id = "loginicon" src="https://image.ibb.co/jgmUok/iconlogin.png">
+          <p class = "loginedtext">logged in as <br>
+            <strong id = "accountname">Weng Gao</strong>
+          </p>
+        </div> -->
+        <a href="http://geoadaptive.com/">
+          <img id="logo-sel" src="GA_logo_white.png"></img>
+        </a>
+
+      </div>
+    </nav>
+
+    <!-- <div class="middle-fpage"> -->
+      <div class="imgholder-gpage">
+        <!-- <img class = "image-gpage" src="ARID1.jpg"> -->
+      </div>
+
+      <div class="title-fpage">
+        <h2 class="heading-fpage">DevelopExplorer Gallery</h2>
+        <br><p class="description-fpage">This is a selected collection of thematic spatial analytics and strategy planning projects GeoAdaptive has conducted around the world using the web-based DevelopExplorer platform.</p>
+      </div>
+      <div class="card-deck">
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="1_paraguay.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Education Assessment in Asuncion, Paraguay</h5>
+            <p class="card-text">This project aims to understand the spatial distribution and potential gaps of medium-level education resources in the capital city of Paraguay, Asunción ...</p>
+            <a href="#"
+            onclick="javascript:void window.open('educationdensity_Paraguay.html','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="2_northerntriangle.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Infrastructure Analysis in Northern Triangle</h5>
+            <p class="card-text">This project tries to quantitatively evaluate and critically assess the infrastructure conditions in the Northern Triangle Region of Central America ...</p>
+            <a href="#"
+             onclick="javascript:void window.open('infrastructure_NorthernTriangle.html','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="3_bangladesh.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">SME Value Chains in Bangladesh</h5>
+            <p class="card-text">This project is designed to prioritize key interventions for improvements by analyzing constraints and opportunities in the spatial value chains of Southwestern Bangladesh ...</p>
+            <a href="#"
+             onclick="javascript:void window.open('SMEvaluechain_Bangladesh.html','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="4_honduras.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Productive Growth Poles for Honduras</h5>
+            <p class="card-text">This project implements a full-terriotrial examination of the productive activities in Honduras and proposes a growth pole development strategy based on it ...</p>
+            <a href="#"
+             onclick="javascript:void window.open('Productivelogics_Honduras.html','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="5_turino.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Urban Indicators for Turino, Italy</h5>
+            <p class="card-text">The platform enhances communication and knowledge of the territoy through vivid visualization.</p>
+            <a href="#"
+            onclick="javascript:void window.open('http://geoadaptive.com/portfolio2/resilient-lands-and-waters-initiative-rlwi-southwest-florida-us/','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="6_santiago.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Green Infrastructure for Santiago, Chile</h5>
+            <p class="card-text">The platform deepens understanding of the places by analyzing constraints and opportunities.</p>
+            <a href="#"
+             onclick="javascript:void window.open('http://geoadaptive.com/portfolio2/agricultural-pueblo/','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="7_guatemala.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Tourism Development Districts for Guatemala</h5>
+            <p class="card-text">The platform enhances communication and knowledge of the territoy through vivid visualization.</p>
+            <a href="#"
+            onclick="javascript:void window.open('http://geoadaptive.com/portfolio2/resilient-lands-and-waters-initiative-rlwi-southwest-florida-us/','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+
+        <div class="card-gpage" style="width: 18rem;">
+          <img class="card-img-top" src="8_nicaragua.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Investigating Fishing Industry in Nicaragua</h5>
+            <p class="card-text">The platform deepens understanding of the places by analyzing constraints and opportunities.</p>
+            <a href="#"
+             onclick="javascript:void window.open('http://geoadaptive.com/portfolio2/agricultural-pueblo/','_blank');return true;" class="btn btn-dark">View</a>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+
+
+    <!-- <div id="map-selpage"></div> -->
+
+
+
+
+
+    <!-- <script src="js/featurespage.js"></script> -->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  </body>
+</html>

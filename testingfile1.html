@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeoJSON file</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+    <style type="text/css">
+        .leaflet-container{background-color:#ffffff;}
+    </style>
+</head>
+
+<body>
+    <div id="map" style="width: 100%; height: 900px;"></div>
+
+    <!-- <script src="http://code.jquery.com/jquery-3.2.1.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="jquery-3.2.1.js"></script>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+    <script>
+        // var myGeoJSONPath = 'LatinAmerica.geo.json';
+        var myGeoJSONPath = 'https://raw.githubusercontent.com/GeoAdaptive/DE_built_V1/master/LatinAmerica.geo.json?token=AgSQK82LKDUnf3mkflH5kcFNeTtww4x6ks5aXnu0wA%3D%3D';
+        var myCustomStyle = {
+            stroke: false,
+            fill: true,
+            fillColor: '#01A9DB',
+            fillOpacity: 1
+        }
+        var map = L.map('map').setView([10.74739, -90], 4);
+
+            $(document).ready(function(){
+              $.ajax(myGeoJSONPath).done(function(data) {
+                var parsedData00 = JSON.parse(data);
+                console.log(parsedData00);
+                console.log("parsed00");
+                var layerMappedPolygons = L.geoJson(parsedData00,
+                  {
+                    style: myCustomStyle,
+                    pointToLayer: function (feature, latlng) {
+                      return new L.Polygon(latlng, {
+                      });
+                    },
+
+                    onEachFeature: function(feature,layer){
+                      layer.bindPopup(
+                        "<b>Name: </b>" +
+                        feature.properties.admin +
+                        "</br>" +
+
+                        "<b>GDP: </b>" +
+                        feature.properties.gdp_md_est +
+                        "</br>" +
+
+                        "<b>Population: </b>" +
+                        feature.properties.pop_est +
+                        "</br>" +
+
+                        "<b>Income level: </b>" +
+                        feature.properties.income_grp +
+                        "</br>"
+                        //
+                        // "<b>Road Density: </b>" +
+                        // feature.properties.rd_density.toFixed(3) + " per square km" +
+                        // "</br>" +
+                        //
+                        // "</br>" +
+                        // "<b>Data Collected Year: </b>" +
+                        // feature.properties.year
+                      )
+                     }
+
+                    }).addTo(map);
+                    // layerMappedPolygons.eachLayer(eachFeatureFunction);
+                    // console.log(layerMappedPolygons[0].id);
+                  })
+                });
+
+
+        // $.getJSON(myGeoJSONPath,function(data){
+        //     var map = L.map('map').setView([39.74739, -105], 4);
+        //
+        //     L.geoJson(data, {
+        //         clickable: false,
+        //         style: myCustomStyle
+        //     }).addTo(map);
+        // })
+    </script>
+</body>
+</html>

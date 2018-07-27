@@ -1,0 +1,1366 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <title>DevelopExplorer@GeoAdaptive Mapping</title>
+    <link rel="icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+      integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+      crossorigin=""/> -->
+    <!--Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+   <script src="dist/leaflet-heat.js"></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+      integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+      crossorigin=""></script> -->
+
+    <!-- THE  -->
+    <!-- <script src="https://cdn.jsdelivr.net/bootstrap.listgroup/1.1.2/listgroup.min.js"></script> -->
+    <!--And add this jquery documentation for downloading and parsing data-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="jquery-3.2.1.js"></script>
+    <!-- underscore functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <!-- embed the leaflet map container -->
+    <!-- <style type="text/css">
+        .leaflet-container{background-color:#ffffff;}
+    </style> -->
+
+    <!-- PDF download function need these call -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+
+    <!-- BELOW ARE SET UP FOR THE SATELLITE MAP -->
+    <!-- //LOAD THE SATELLITE MAP -->
+        <meta charset='utf-8' />
+        <title></title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+        <!-- <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script> -->
+        <style>
+            body { margin:0; padding:0; }
+            #map0 { position:absolute; left:20%; right:0; top:0; height:80%; z-index:-10;}
+        </style>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+    <!-- BELOW SETS UP THE CONTENT TREE FOR THE LAYERS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example of Bootstrap 3 Accordion with Plus/Minus Icon</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .bs-example{
+        	margin: 0;
+        }
+        .panel-title .glyphicon{
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            // Add minus icon for collapse element which is open by default
+            $(".collapse.in").each(function(){
+            	$(this).siblings(".panel-heading").find(".glyphicon").addClass("glyphicon-minus").removeClass("glyphicon-plus");
+            });
+
+            // Toggle plus minus icon on show hide of collapse element
+            $(".collapse").on('show.bs.collapse', function(){
+            	$(this).parent().find(".glyphicon").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+            }).on('hide.bs.collapse', function(){
+            	$(this).parent().find(".glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+            });
+        });
+    </script>
+  </head>
+  <body>
+
+
+<!-- Add this collapse later back in!!! -->
+    <div class="pos-f-t">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+          <h4 class="text-white">Collapsed content</h4>
+          <span class="text-muted">Toggleable via the navbar brand.</span>
+        </div>
+      </div>
+      <!-- <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav> -->
+    </div>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+      <a class="navbar-brand" href="index.html">Develop<span id = "x1">Explorer</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallerypage.html">Gallery</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Signup</a>
+              <a class="dropdown-item" href="#">Log in</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Not George?</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li> -->
+        </ul>
+
+        <!-- the following is the signup and login areas -->
+        <!-- <div>
+          <button class="btn btn-default dropdown-toggle" type="button" id="loginbutton" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Log in
+          </button>
+          <button class="btn btn-default dropdown-toggle" type="button" id="signupbutton" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Sign up
+          </button>
+          <img id = "loginicon" src="https://image.ibb.co/jgmUok/iconlogin.png">
+          <p class = "loginedtext">logged in as <br>
+            <strong id = "accountname">Weng Gao</strong>
+          </p>
+        </div> -->
+        <a href="http://geoadaptive.com/">
+          <img id="logo-sel" src="GA_logo_white.png"></img>
+        </a>
+    </div>
+
+    <div id="topbuttons-mappage" class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+      <div class="btn-group" role="group">
+        <!-- <li class="btn btn-primary dropdown-toggle my-2 my-sm-0" id="mapcontrol-mappage" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="#">SETTINGS</a>
+        </li> -->
+        <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle my-2 my-sm-0" style="border-color:grey;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Basemap
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" id="lightmap" href="#">Light</a>
+          <a class="dropdown-item" id="darkmap" href="#">Dark</a>
+          <!-- <a class="dropdown-item" id="hybridmap" href="#">Hybrid</a> -->
+          <a class="dropdown-item" id="satellitemap" href="#">Satellite</a>
+        </div>
+      </div>
+
+
+      <div class="btn-group" role="group">
+        <!-- <label>
+          <input data-toggle="toggle" type="checkbox">
+        </label> -->
+
+        <button id="btnGroupDrop2" type="button" class="btn btn-dark dropdown-toggle my-2 my-sm-0" style="border-color:grey;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <input checked data-toggle="toggle" type="checkbox"> -->
+          <!-- <input id="autounitcheck" class="btn btn-dark my-2 my-sm-0" type="checkbox" name="vehicle" value="Bike"> -->
+          <span id="selectedunit">Choose Unit</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+          <a class="dropdown-item" id="countryscale" href="#">Country</a>
+          <a class="dropdown-item" id="depscale" href="#">Department</a>
+          <a class="dropdown-item" id="distscale" href="#">District</a>
+        </div>
+        <!-- <button id="heatmapcontrol" type="button" class="btn btn-dark my-2 my-sm-0" style="border-color:grey;">
+          Heatmap
+        </button> -->
+        <button id="gapshowbutton" class="btn btn-dark" data-toggle="collapse" data-target="#rightcol-map" style="border-color:grey;">
+          <span id="selected5">Launch Analytics</span>
+        </button>
+      </div>
+
+
+      <!-- <button type="button" class="btn btn-dark my-2 my-sm-0" id="printmapbutton" onclick="PrintFunction()">
+        <span id="selected6">Print Map</span>
+      </button> -->
+
+      <!-- <button type="button" class="btn btn-dark my-2 my-sm-0">
+        Heatmap
+        <input id="heatmapcheck" class="btn btn-dark my-2 my-sm-0" type="checkbox" name="vehicle" value="Bike">
+      </button> -->
+    </div>
+
+    </nav>
+
+    <!-- testing the live API request and substitute -->
+
+    <!-- <button id="gapshowbutton" class="btn btn-primary" data-toggle="collapse" data-target="#rightcol-map">
+      <span id="selected5">Launch Analytics</span>
+    </button> -->
+
+    <div id= "rightcol-map" class="collapse" aria-labelledby="gapshowbutton">
+      <!-- <div class="rightol-elements"> -->
+        <!-- <h4 style="display: inline"><b><strong>Analytics Module</strong></b></h4><br><br> -->
+        <!-- <p style="color:#fff">Identify the most needs-unsatisfied areas.</p> -->
+        <br><br><br>
+
+        <!-- THE NEW ANALYTICS MODULE SHOULD LOOK LIKE THE DATA MODULE COLLAPSE -->
+        <!-- BELOW IS THE ANALYTICS MODULE DROPDOWN SECTION -->
+
+        <div class="bs-example" style="width:96%;">
+          <h3 class="gaptopictitle">Available Topics</h3>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#gapcollapseOne">
+                              <span class="glyphicon glyphicon-plus"></span>
+                              <span>Transportation Gap</span>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="gapcollapseOne" class="panel-collapse collapse">
+                      <ul class="list-group collapse in" id="menuPanelListGroup" data-toggle="items">
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="gaptitle1" data-toggle="collapse" href="#menuPanelSubListGroup1" aria-expanded="true">
+                                  <b id="g1b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Coverage Gap
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover1">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+
+                                  <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                          </li>
+
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="gaptitle2" data-toggle="collapse" href="#menuPanelSubListGroup2" aria-expanded="true">
+                                <b id="g2b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Quality Gap
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover2">
+                                  This category is defined by the current status data collected by the Development Bank.
+                                </span>
+                              </a>
+                          </li>
+
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="gaptitle3" data-toggle="collapse" href="#menuPanelSubListGroup2" aria-expanded="true">
+                                <b id="g3b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Outcome Gap
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover3">
+                                  This category is defined by the current status data collected by the Development Bank.
+                                </span>
+                              </a>
+                          </li>
+                      </ul>
+                    </div>
+
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#gapcollapseTwo" aria-expanded="true">
+                              <span class="glyphicon glyphicon-plus"></span>
+                              Education Gap
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="gapcollapseTwo" class="panel-collapse collapse">
+                        <ul class="list-group collapse in" id="menuPanelListGroup" data-toggle="items">
+                            <li class="list-group-item librePanelListGroupItem">
+                                <a id="gaptitle4" data-toggle="collapse" href="#menuPanelSubListGroup3" aria-expanded="true">
+                                  <b id="g4b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Coverage Gap
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                    <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover3">
+                                      This investment agencies such as the Development Bank.
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item librePanelListGroupItem">
+                                <a id="gaptitle5" data-toggle="collapse" href="#menuPanelSubListGroup4" aria-expanded="true">
+                                  <b id="g5b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Quality Gap
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover4">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+                                </a>
+                            </li>
+
+                            <li class="list-group-item librePanelListGroupItem">
+                                <a id="gaptitle6" data-toggle="collapse" href="#menuPanelSubListGroup4" aria-expanded="true">
+                                  <b id="g6b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Outcome Gap
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover4">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+                                  <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                  <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#gapcollapseThree" aria-expanded="true">
+                              <span class="glyphicon glyphicon-plus"></span>
+                              Public Health Gap
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="gapcollapseThree" class="panel-collapse collapse">
+                        <ul class="list-group collapse in" id="menuPanelListGroup">
+                            <li class="list-group-item librePanelListGroupItem">
+                                <a id="gaptitle7" data-toggle="collapse" href="#menuPanelSubListGroup5" aria-expanded="true">
+                                  <b id="g7b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Coverage Gap
+                                    <span class="glyphicon glyphicon-info-sign"></span>
+                                    <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover5">
+                                      This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item librePanelListGroupItem">
+                                <a id="gaptitle8" data-toggle="collapse" href="#menuPanelSubListGroup6">
+                                  <b id="g8b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Quality Gap
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover6">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+
+                                </a>
+
+                            </li>
+
+                            <li class="list-group-item librePanelListGroupItem">
+                                <a id="gaptitle9" data-toggle="collapse" href="#menuPanelSubListGroup7">
+                                  <b id="g9b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                  <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                  &nbsp;&nbsp; Outcome Gap
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover6">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-map">
+          <button class="btn btn-light my-2 my-sm-0" type="button" id="gapresetbutton" aria-haspopup="false">
+            Reset
+          </button>
+          <button class="btn btn-light my-2 my-sm-0" type="button" id="gaplearnbutton" aria-haspopup="false" onclick="javascript:void window.open('gallerypage.html','_blank');return true;">
+            Learn more
+          </button>
+          <br><br><br><br>
+
+        </div>
+
+
+
+<!-- BELOW ARE THE OLD VERSION OF DISPLAYING THE GAP ANALYSIS OPTIONS
+NOW WE ARE CHANGING IT TO THE SAME AS THE DATA MODULE!!!!! -->
+        <!-- <div id="gaptopicbar">
+            <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="gaptopicbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span style="max-width:100%;" id="selected1">Choose Topic</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="topic_education" href="#">Education</a>
+              <a class="dropdown-item" id="topic_health" href="#">Public Health</a>
+              <a class="dropdown-item" id="topic_infra" href="#">Infrastructure</a>
+              <a class="dropdown-item" id="topic_socio" href="#">Socioeconomic</a>
+            </div>
+        </div> -->
+        <!-- <div id="gaptypebar1">
+            <p style="font-size:16px;display: inline;color:#fff"><b><strong>EDUCATION GAP</strong></b></p><br>
+            <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="gaptypebutton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span style="max-width:100%;" id="selected2">View</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="type_coverage" href="#">Coverage</a>
+              <a class="dropdown-item" id="type_quality" href="#">Quality</a>
+              <a class="dropdown-item" id="type_outcome" href="#">Outcome</a>
+            </div>
+            <button class="btn btn-light my-2 my-sm-0" type="button" id="gapresetbutton1" aria-haspopup="false">
+              <span style="max-width:100%;" id="gapreset"><strong>Reset</strong></span>
+            </button>
+        </div> -->
+        <!-- <div id="gaplearnmorebar">
+          <button class="btn btn-light my-2 my-sm-0" type="button" id="gaplearnmorebutton" aria-haspopup="false" onclick="javascript:void window.open('gallerypage.html','_blank');return true;">
+            <span style="max-width:100%;" id="gapreset"><strong>Learn more</strong></span>
+          </button>
+        </div> -->
+
+        <br><br><br>
+
+        <!-- <div id="gaptypebar2">
+          <p style="font-size:16px;display: inline;color:#fff"><b><strong>PUBLIC HEALTH GAP</strong></b></p><br>
+            <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="gaptypebutton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span style="max-width:100%;" id="selected2">View</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="type_coverage" href="#">Coverage</a>
+              <a class="dropdown-item" id="type_quality" href="#">Quality</a>
+              <a class="dropdown-item" id="type_outcome" href="#">Outcome</a>
+            </div>
+            <button class="btn btn-light my-2 my-sm-0" type="button" id="gapresetbutton2" aria-haspopup="false">
+              <span style="max-width:100%;" id="gapreset"><strong>Reset</strong></span>
+            </button>
+        </div> -->
+
+        <br><br><br>
+
+        <!-- <div id="gaptypebar3">
+          <p style="font-size:16px;display: inline;color:#fff"><b><strong>TRANSPORTATION GAP</strong></b></p><br>
+            <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="gaptypebutton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span style="max-width:100%;" id="selected2">View</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="type_coverage" href="#">Coverage</a>
+              <a class="dropdown-item" id="type_quality" href="#">Quality</a>
+              <a class="dropdown-item" id="type_outcome" href="#">Outcome</a>
+            </div>
+            <button class="btn btn-light my-2 my-sm-0" type="button" id="gapresetbutton3" aria-haspopup="false">
+              <span style="max-width:100%;" id="gapreset"><strong>Reset</strong></span>
+            </button>
+        </div> -->
+
+        <br><br><br>
+
+        <!-- <div id="gaptypebar4">
+            <p style="font-size:16px;display: inline;color:#fff"><b><strong>SOCIOECONOMIC GAP</strong></b></p><br>
+            <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="gaptypebutton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span style="max-width:100%;" id="selected2">View</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="type_coverage" href="#">Coverage</a>
+              <a class="dropdown-item" id="type_quality" href="#">Quality</a>
+              <a class="dropdown-item" id="type_outcome" href="#">Outcome</a>
+            </div>
+            <button class="btn btn-light my-2 my-sm-0" type="button" id="gapresetbutton4" aria-haspopup="false">
+              <span style="max-width:100%;" id="gapreset"><strong>Reset</strong></span>
+            </button>
+        </div> -->
+
+      <!-- </div> -->
+
+      <!-- <br><br><br><br><br><br>
+      <h4 style="display: inline"><b>Download</b></h4><br><br>
+      <p>Download function for analytics insights information.</p>
+      <div id="pdfbar">
+        <button class="btn btn-dark my-2 my-sm-0" type="button" onclick="tableToPDF1()" id="pdfbutton" aria-haspopup="false">
+          PDF report
+        </button>
+      </div>
+      <div id="excelbar">
+        <button class="btn btn-dark my-2 my-sm-0" type="button" id="tablebutton" aria-haspopup="false">
+          Excel table
+        </button>
+      </div> -->
+    </div>
+
+
+
+
+
+    <div class= "leftcol-map">
+      <div class="countryprofile">
+        <!-- Trying to replace with API request takes some more work. You need a local server to get it run. -->
+        <a href="http://google.com" style="display: inline"><img id="nationalflag" src="Honduras_flag.png"></img></a>&nbsp;&nbsp;
+        <h2 style="display: inline;font-size:21px;">Honduras</h2><br><br>
+        <!-- <p ><b>Population:</b> <span id="poptext">loading...</span></p>
+        <p ><b>Area:</b> <span id="areatext">loading...</span></p>
+        <p ><b>GDP:</b> <span id="gdptext">loading...</span></p>
+        <p ><b>HDI:</b> <span id="hditext">loading...</span></p>
+        <p><i>(data sources: API call)</i></p> -->
+      </div>
+      <br>
+
+      <!-- BELOW IS THE LAYER SELECTION SECTION -->
+
+      <div class="bs-example" style="width:96%;">
+        <h4 id="datatopictitle">Data Module</h4>
+          <div class="panel-group" id="accordion">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span>Transportation</span>
+                          </a>
+                      </h4>
+                  </div>
+
+                  <div id="collapseOne" class="panel-collapse collapse">
+                    <!-- <div class="panel-body">
+                        <p>Ground transportation network across the country.
+                          <a href="http://www.worldbank.org/en/news/press-release/2016/07/25/paraguay-improvements-transportation-road-safety-benefit-400000-world-bank" target="_blank">Learn more.</a>
+                        </p>
+                    </div> -->
+                    <ul class="list-group collapse in" id="menuPanelListGroup" data-toggle="items">
+                        <li class="list-group-item librePanelListGroupItem">
+                            <a id="roadstitle1" data-toggle="collapse" href="#menuPanelSubListGroup1" aria-expanded="true">
+                                <b id="r1b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Roads by Hierarchy
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover1">
+                                  This category is defined by the current status data from open sources. It includes primary and secondary roads.
+                                </span>
+
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                            </a>
+                            <!-- <ul id="menuPanelSubListGroup1" class="collapse librePanelSubListGroupItem">
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads1" type="checkbox" value="">Primary Roads
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads2" type="checkbox" value="">Secondary Roads
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads3" type="checkbox" value="">Tertiary Roads
+                                  </div>
+                                </li>
+                            </ul> -->
+                        </li>
+
+                        <li class="list-group-item librePanelListGroupItem">
+                            <a id="roadstitle2" data-toggle="collapse" href="#menuPanelSubListGroup2" aria-expanded="true">
+                              <b id="r2b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                              <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                              &nbsp;&nbsp; Roads by Condition
+                              <span class="glyphicon glyphicon-info-sign"></span>
+                              <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover2">
+                                This category is defined by the current status data from open sources. It includes paved and gravel roads.
+                              </span>
+                            </a>
+                            <!-- <ul id="menuPanelSubListGroup2" class="collapse librePanelSubListGroupItem">
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads4" type="checkbox" value="">Paved Roads
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads5" type="checkbox" value="">Gravel and Cobblestone
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="roads6" type="checkbox" value="">Dirt Roads
+                                    </div>
+                                </li>
+                            </ul> -->
+                        </li>
+
+                        <li class="list-group-item librePanelListGroupItem">
+                            <a id="roadstitle3" data-toggle="collapse" href="#menuPanelSubListGroup2" aria-expanded="true">
+                              <b id="r3b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                              <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                              &nbsp;&nbsp; Airports by Type
+                              <span class="glyphicon glyphicon-info-sign"></span>
+                              <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover2">
+                                This category is defined by the current status data from open sources. It includes international and national airports.
+                              </span>
+                            </a>
+                            <!-- <ul id="menuPanelSubListGroup2" class="collapse librePanelSubListGroupItem">
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads4" type="checkbox" value="">Paved Roads
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads5" type="checkbox" value="">Gravel and Cobblestone
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="roads6" type="checkbox" value="">Dirt Roads
+                                    </div>
+                                </li>
+                            </ul> -->
+                        </li>
+
+                        <li class="list-group-item librePanelListGroupItem">
+                            <a id="roadstitle4" data-toggle="collapse" href="#menuPanelSubListGroup2" aria-expanded="true">
+                              <b id="r4b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                              <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                              &nbsp;&nbsp; Ports by Type
+                              <span class="glyphicon glyphicon-info-sign"></span>
+                              <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover2">
+                                This category is defined by the current status data from open sources. It includes private and public ports.
+                              </span>
+                            </a>
+                            <!-- <ul id="menuPanelSubListGroup2" class="collapse librePanelSubListGroupItem">
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads4" type="checkbox" value="">Paved Roads
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                  <div class="checkbox">
+                                    <input id="roads5" type="checkbox" value="">Gravel and Cobblestone
+                                  </div>
+                                </li>
+                                <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="roads6" type="checkbox" value="">Dirt Roads
+                                    </div>
+                                </li>
+                            </ul> -->
+                        </li>
+                    </ul>
+                  </div>
+
+              </div>
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Education
+                          </a>
+                      </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                      <!-- <div class="panel-body">
+                          <p>The information and methods of breaking categories of hospital types below.
+                            <a href="http://www.worldbank.org/en/news/press-release/2016/07/25/paraguay-improvements-transportation-road-safety-benefit-400000-world-bank" target="_blank">Learn more.</a>
+                          </p>
+                      </div> -->
+                      <ul class="list-group collapse in" id="menuPanelListGroup" data-toggle="items">
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle5" data-toggle="collapse" href="#menuPanelSubListGroup3" aria-expanded="true">
+                                <b id="r5b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Maternal Education
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover3">
+                                    This category is defined by the current status data from open sources.
+                                  </span>
+                                  <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                  <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup3" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools1" type="checkbox" value="">Primary Schools
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools2" type="checkbox" value="">Middle Schools
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools3" type="checkbox" value="">Universities
+                                    </div>
+                                    <span></span>
+                                  </li>
+                              </ul> -->
+                          </li>
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle6" data-toggle="collapse" href="#menuPanelSubListGroup4" aria-expanded="true">
+                                <b id="r6b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Basic Education
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover4">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                                <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup4" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                      <div class="checkbox">
+                                        <input id="schools4" type="checkbox" value="">Over 1,000
+                                      </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools5" type="checkbox" value="">Over 500
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools6" type="checkbox" value="">Over 100
+                                    </div>
+                                  </li>
+                              </ul> -->
+                          </li>
+
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle7" data-toggle="collapse" href="#menuPanelSubListGroup4" aria-expanded="true">
+                                <b id="r7b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Mid-level Education
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover4">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                                <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup4" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                      <div class="checkbox">
+                                        <input id="schools4" type="checkbox" value="">Over 1,000
+                                      </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools5" type="checkbox" value="">Over 500
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools6" type="checkbox" value="">Over 100
+                                    </div>
+                                  </li>
+                              </ul> -->
+                          </li>
+
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle8" data-toggle="collapse" href="#menuPanelSubListGroup4" aria-expanded="true">
+                                <b id="r8b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Higher Education
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover4">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                                <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup4" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                      <div class="checkbox">
+                                        <input id="schools4" type="checkbox" value="">Over 1,000
+                                      </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools5" type="checkbox" value="">Over 500
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="schools6" type="checkbox" value="">Over 100
+                                    </div>
+                                  </li>
+                              </ul> -->
+                          </li>
+
+                      </ul>
+                  </div>
+
+              </div>
+
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Public Health
+                          </a>
+                      </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                      <!-- <div class="panel-body">
+                          <p>The information and methods of breaking categories of school types below.
+                            <a href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a>
+                          </p>
+                      </div> -->
+                      <ul class="list-group collapse in" id="menuPanelListGroup">
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle9" data-toggle="collapse" href="#menuPanelSubListGroup5" aria-expanded="true">
+                                <b id="r9b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Primary Healthcare
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover5">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+                                  <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                  <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup5" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="hospitals1" type="checkbox" value="">National
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="hospitals2" type="checkbox" value="">Regional
+                                    </div>
+                                  </li>
+                              </ul> -->
+                          </li>
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle10" data-toggle="collapse" href="#menuPanelSubListGroup6">
+                                <b id="r10b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Secondary Healthcare
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover6">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                                <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup6" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="hospitals3" type="checkbox" value="">Advanced
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="hospitals4" type="checkbox" value="">Basics
+                                    </div>
+                                  </li>
+                              </ul> -->
+                          </li>
+
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle11" data-toggle="collapse" href="#menuPanelSubListGroup6">
+                                <b id="r11b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Tertiary Healthcare
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover6">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                                <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                              <!-- <ul id="menuPanelSubListGroup6" class="collapse librePanelSubListGroupItem">
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="hospitals3" type="checkbox" value="">Advanced
+                                    </div>
+                                  </li>
+                                  <li class="list-group-item librePanelListGroupItem">
+                                    <div class="checkbox">
+                                      <input id="hospitals4" type="checkbox" value="">Basics
+                                    </div>
+                                  </li>
+                              </ul> -->
+                          </li>
+
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- //BELOW IS OTHER LAYER DATASETS -->
+
+<!--
+
+      <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Public Health
+                  </a>
+              </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse"> -->
+
+
+      <!--For different color styles of the panel
+       https://getbootstrap.com/docs/3.3/components/#list-group -->
+      <div class="bs-example2" style="width:96%;">
+        <!-- <h4 id="addon_title">Add-on Features</h4> -->
+        <!-- <span id="addon_info" class="glyphicon glyphicon-info-sign"></span> -->
+        <!-- <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover_addon">
+          Please contact us for more options.
+        </span> -->
+          <div class="panel-group" id="accordion2">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span>Natural Environment</span>
+                          </a>
+                      </h4>
+                  </div>
+
+                  <div id="collapseFour" class="panel-collapse collapse">
+                    <ul class="list-group collapse in" id="menuPanelListGroup" data-toggle="items">
+                        <li class="list-group-item librePanelListGroupItem">
+                            <a id="roadstitle1" data-toggle="collapse" href="#menuPanelSubListGroup1">
+                                <b id="r1b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Protected Area by Type
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover1">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                            </a>
+                        </li>
+
+                        <li class="list-group-item librePanelListGroupItem">
+                            <a id="roadstitle2" data-toggle="collapse" href="#menuPanelSubListGroup2">
+                              <b id="r2b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                              <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                              &nbsp;&nbsp; Water Features by Shed
+                              <span class="glyphicon glyphicon-info-sign"></span>
+                              <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover2">
+                                This category is defined by the current status data collected by the Development Bank.
+                              </span>
+                            </a>
+                        </li>
+                    </ul>
+                  </div>
+
+              </div>
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Poverty and Income
+                          </a>
+                      </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse">
+                      <ul class="list-group collapse in" id="menuPanelListGroup" data-toggle="items">
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle3" data-toggle="collapse" href="#menuPanelSubListGroup3">
+                                <b id="r3b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Poverty Rate
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover3">
+                                    This investment agencies such as the Development Bank.
+                                  </span>
+                                  <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                  <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                          </li>
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle4" data-toggle="collapse" href="#menuPanelSubListGroup4">
+                                <b id="r4b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Gini Index
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover4">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                                <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+                          </li>
+
+                      </ul>
+                  </div>
+
+              </div>
+
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Urban Development
+                          </a>
+                      </h4>
+                  </div>
+                  <div id="collapseSix" class="panel-collapse collapse">
+                      <!-- <div class="panel-body">
+                          <p>The information and methods of breaking categories of school types below.
+                            <a href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a>
+                          </p>
+                      </div> -->
+                      <ul class="list-group collapse in" id="menuPanelListGroup">
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle5" data-toggle="collapse" href="#menuPanelSubListGroup5">
+                                <b id="r5b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Urbanization Rate
+                                  <span class="glyphicon glyphicon-info-sign"></span>
+                                  <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover5">
+                                    This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                  </span>
+                                  <!-- <b class="pull-right glyphicon glyphicon-ok"></b> -->
+                                  <!-- <b class="pull-right glyphicon glyphicon-chevron-right"></b> -->
+                              </a>
+
+                          </li>
+                          <li class="list-group-item librePanelListGroupItem">
+                              <a id="roadstitle6" data-toggle="collapse" href="#menuPanelSubListGroup6">
+                                <b id="r6b" class="pull-left glyphicon glyphicon-ok" style="display:none"></b>
+                                <!-- <span class="glyphicon glyphicon-plus"></span> -->
+                                &nbsp;&nbsp; Urban Expansion Area
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <span href="https://www.tutorialrepublic.com/css-tutorial/" target="_blank" id="hoverover6">
+                                  This category is defined by the standards set by infrastructure investment agencies such as the Development Bank.
+                                </span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+    <!-- HERE BELOW THE STRUCTURED DATA CATALOGUE -->
+    <!-- <section class="container">
+        <h1>Data Catalogue</h1>
+        <h3>because we can.</h3>
+      <div class="ac">
+        <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+        <label class="ac-label" for="ac-1">Item 1</label>
+        <article class="ac-text">
+          <div class="ac-sub">
+            <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+            <label class="ac-label" for="ac-2">I love jelly donuts</label>
+            <article class="ac-sub-text">
+              <p>But steed that has lost its rider, the masterless ocean overruns the globe.</p>
+              <p>Consider the subtleness of the sea; how its most dreaded creatures glide under the world began.</p>
+            </article>
+          </div>
+
+          <div class="ac-sub">
+            <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
+            <label class="ac-label" for="ac-3">They are so delicious</label>
+            <article class="ac-sub-text">
+              <p>But steed that has lost its rider, the masterless ocean overruns the globe.</p>
+              <p>Consider the subtleness of the sea; how its most dreaded creatures glide under the world began.</p>
+            </article>
+          </div>
+        </article>
+      </div>
+
+      <div class="ac">
+        <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
+        <label class="ac-label" for="ac-4">Item 2</label>
+        <article class="ac-text">
+          <div class="ac-sub">
+            <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
+            <label class="ac-label" for="ac-5">I also love regular donuts</label>
+            <article class="ac-sub-text">
+              <p>But not only.</p>
+              <p>Consider the subtleness of the sea; how unapparent world began.</p>
+            </article>
+          </div>
+
+      <div class="ac-sub">
+        <input class="ac-input" id="ac-6" name="ac-6" type="checkbox" />
+        <label class="ac-label" for="ac-6">They are also delicious</label>
+        <article class="ac-sub-text">
+          <p>But steed that has lost its rider, the masterless ocean overruns the globe.</p>
+          <p>Consider the subtleness of the sea; how its most dreaded creatures glide under the world began.</p>
+        </article>
+      </div>
+    </article>
+
+  </div>
+
+</section> -->
+
+
+
+      <!-- <div class="scalebar">
+        <button class="btn btn-light dropdown-toggle my-2 my-sm-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Scale
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" id="countryscale" href="#">Country</a>
+          <a class="dropdown-item" id="depscale" href="#">Department</a>
+          <a class="dropdown-item" id="muniscale" href="#">District</a>
+        </div>
+      </div> -->
+
+      <!-- <div class="option" class="leaflet-bar" id="scalebar">
+        <label>Select Scales </label><br>
+        <select name="basemaps" class="btn btn-light my-2 my-sm-0" id="scaleselector">
+          <option class = "option" value="Scale">Scale</option>
+          <option class = "option" id="countryscale" value="Country">Country</option>
+          <option class = "option" id="depscale" value="Department">Department</option>
+          <option class = "option" id="muniscale" value="District">District</option>
+        </select>
+      </div> -->
+
+
+      <!-- <div class="layerbar">
+        <label>Select Information</label><br>
+        <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Major Roads &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="roads2" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Secondary Roads &nbsp;&nbsp;&nbsp;</label><br>
+        <input id="airports" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Airports &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="ports" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Ports &nbsp;&nbsp;&nbsp;</label><br>
+        <input id="schools" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Schools &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="hospitals" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Hospitals &nbsp;&nbsp;&nbsp;</label><br>
+      </div> -->
+
+      <div class="buttons-map">
+        <button class="btn btn-light my-2 my-sm-0" type="button" id="launchbutton-map" aria-haspopup="false">
+          Show All
+        </button>
+        <button class="btn btn-light my-2 my-sm-0" type="button" id="resetbutton-map" aria-haspopup="false">
+          Reset
+        </button>
+        <br><br><br><br>
+
+      </div>
+    </div>
+
+    <!-- //OPTIONAL LEGEND OBJECT -->
+    <div class="legend" style="display:none;">
+        <h5>Legend</h5>
+        <!-- <div id = "box1">
+          <div class = "label1" id = "fill1" ></div><p class = label1> Boundary </p>
+        </div> -->
+        <div style = "display:none" id = "box2">
+          <div class = "label1" id = "fill2" ></div><p class = label1> Primary Roads </p>
+        </div>
+        <div style = "display:none" id = "box3">
+          <div class = "label1" id = "fill3" ></div><p class = label1> Secondary Roads </p>
+        </div>
+        <div style = "display:none" id = "box4">
+          <div class = "label1" id = "fill4" ></div><p class = label1> Paved Roads </p>
+        </div>
+        <div style = "display:none" id = "box5">
+          <div class = "label1" id = "fill5" ></div><p class = label1> Gravel Roads </p>
+        </div>
+        <div style = "display:none" id = "box6">
+          <div class = "label1" id = "fill6" ></div><p class = label1> Airports </p>
+        </div>
+        <div style = "display:none" id = "box7">
+          <div class = "label1" id = "fill7" ></div><p class = label1> Ports </p>
+        </div>
+        <div style = "display:none" id = "box10">
+          <div class = "label1" id = "fill10" ></div><p class = label1> Middle Schools </p>
+        </div>
+    </div>
+
+  <!-- //LOAD THE LEGEND FOR THE COLOR RAMP   -->
+
+    <div id="map-mappage"></div>
+    <div class="chartsarea" style="display:none;">
+      <canvas class="charts" id="myChart1"></canvas>
+      <br>
+      <canvas class="charts" id="myChart2"></canvas>
+    </div>
+
+    <!-- <div class="topbuttons-mappage">
+      <div class="basemapbar">
+        <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="hybrid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Basemap
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" id="lightmap" href="#">Light</a>
+          <a class="dropdown-item" id="darkmap" href="#">Dark</a>
+          <a class="dropdown- item" id="hybridmap" href="#">Hybrid</a>
+        </div>
+      </div>
+
+      <div class="scalebar">
+        <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="scalebutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Scale
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" id="countryscale" href="#">Country</a>
+          <a class="dropdown-item" id="depscale" href="#">Department</a>
+          <a class="dropdown-item" id="distscale" href="#">District</a>
+        </div>
+      </div>
+
+      <div class="heatmapbar">
+        <label class="btn btn-dark my-2 my-sm-0">
+          <input id="heatmapcheck" class="layers" type="checkbox" name="vehicle" value="Bike">
+          Heatmap
+        </label>
+      </div>
+    </div> -->
+
+
+
+
+<!-- btn btn-dark my-2 my-sm-0 -->
+
+    <!-- THE COLLAPSABLE LAYERS
+    REFERENCE:https://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_forms_collapsible -->
+    <!-- http://jsfiddle.net/UwL5L/2/ -->
+    <!-- <div class="layersonmap" id="accordion">
+      <button class="btn btn-dark dropdown-toggle my-2 my-sm-0" type="button" id="layerbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="color:white">
+          Select Information
+        </a>
+      </button>
+      <div id="collapseOne" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div class="checkbox">
+            <input id="roads1" type="checkbox" value="">Primary Roads
+          </div>
+          <div class="checkbox">
+            <input id="roads2" type="checkbox" value="">Secondary Roads
+          </div>
+          <div class="checkbox">
+            <input id="airports" type="checkbox" value="">Airports
+          </div>
+            <div class="checkbox">
+              <input id="ports" type="checkbox" value="">Ports
+            </div>
+            <div class="checkbox">
+              <input id="schools" type="checkbox" value="">Schools
+            </div>
+            <div class="checkbox">
+              <input id="hospitals" type="checkbox" value="">Hospitals
+            </div>
+      </div>
+    </div> -->
+
+      <!-- <div class="panel panel-default"> -->
+        <!-- <div class="panel-heading">
+          <label class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+              <input type="checkbox" value=""> Select Information
+            </a>
+          </label>
+        </div> -->
+      <!-- </div> -->
+
+
+      <!-- AUTOMATED TABLE GENERATION -->
+      <table style="display:none" id ="testTable" summary="Infrastructure Efficiency Profile." rules="groups" frame="hsides" border="2">
+        <caption>PROFILE FOR MUNICIPALITY <p style="background-color: #f07f30; color: #ffffff; font-weight: bold;" id="exceltitle"></p></caption>
+        <caption>DataXLat @ GeoAdaptive LLC</caption>
+        <thead valign="top">
+          <tr>
+            <th>ID</th>
+            <th>Country</th>
+            <th>Department</th>
+            <th>Municipality</th>
+            <th class = "X_colhead" border="1">Social-Economy<br>Poverty Rate: % of population living in poverty</th>
+            <th class = "X_colhead" border="1">Transportation<br>Total Length of Roads (km)</th>
+            <th class = "X_colhead" border="1">Transportation<br>Road Density (area/roads km)</th>
+            <th class = "X_colhead" border="1">Transportation<br>Typology split: Rural / Urban</th>
+            <th class = "X_colhead" border="1">Transportation<br>Typology split: km x mayor, secondary, tertiary</th>
+            <th class = "X_colhead" border="1">Transportation<br>Road efficiency (% population within 30 minutes of road)</th>
+            <th class = "X_colhead" border="1">Utility<br>Sanitation: % of coverage</th>
+            <th class = "X_colhead" border="1">Utility<br>Electricity: % of coverage</th>
+            <th class = "X_colhead" border="1">Utility<br>Water: % of coverage</th>
+            <th class = "X_colhead" border="1">Utility<br>Basic Needs Unsatisfied:</th>
+            <th class = "X_colhead" border="1">Other<br>Notes:</th>
+          </tr>
+        </thead>
+             <tbody>
+               <tr>
+                 <td id = "X_ID">0001</td>
+                 <td id = "X_country">Honduras</td>
+                 <td id = "X_department">Peten</td>
+                 <td id = "X_municipality">Quito</td>
+                 <td id = "X_PovertyRate">12%</td>
+                 <td id = "X_rdlength">3671</td>
+                 <td id = "X_rddensity">200</td>
+                 <td id = "X_typologysplit1">6:4</td>
+                 <td id = "X_typologysplit2">1:3:6</td>
+                 <td id = "X_rdefficiency">35</td>
+                 <td id = "X_sanitation">73</td>
+                 <td id = "X_Electricity">85</td>
+                 <td id = "X_Water">90</td>
+                 <td id = "X_BasicNeeds">24</td>
+                 <td id = "X_Notes">something to consider</td>
+               </tr>
+        </table>
+
+    <!-- <script src="js/listgroupjs/listgroup.js"></script> -->
+    <script src="js/productivelogicspage.js"></script>
+    <script src="js/pdfreport.js"></script>
+    <script src="dist/bundle.js"></script>
+    <script>
+    // window.jQuery || document.write('<script src="../bower_components/jquery/dist/jquery.min.js"><\/script>')
+    </script>
+    <script src="dist/jQuery.print.js"></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <!-- Bootstrap toggle for the switch slider input -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  </body>
+</html>

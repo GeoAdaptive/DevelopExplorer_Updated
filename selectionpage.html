@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <title>DevelopExplorer@GeoAdaptive Selection</title>
+    <link rel="icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+      integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+      crossorigin=""/> -->
+    <!--Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+      integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+      crossorigin=""></script> -->
+
+    <!--And add this jquery documentation for downloading and parsing data-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="jquery-3.2.1.js"></script>
+    <!-- underscore functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <!-- embed the leaflet map container -->
+    <style type="text/css">
+        .leaflet-container{background-color:#ffffff;}
+    </style>
+
+  </head>
+  <body>
+
+
+<!-- Add this collapse later back in!!! -->
+<!-- <div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h4 class="text-white">Collapsed content</h4>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div> -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+
+      <a class="navbar-brand" href="index.html">Develop<span id = "x1">Explorer</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallerypage.html">Gallery</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Signup</a>
+              <a class="dropdown-item" href="#">Log in</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Not George?</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li> -->
+        </ul>
+
+        <!-- the following is the signup and login areas -->
+        <!-- <div>
+          <button class="btn btn-default dropdown-toggle" type="button" id="loginbutton" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Log in
+          </button>
+          <button class="btn btn-default dropdown-toggle" type="button" id="signupbutton" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+            Sign up
+          </button>
+          <img id = "loginicon" src="https://image.ibb.co/jgmUok/iconlogin.png">
+          <p class = "loginedtext">logged in as <br>
+            <strong id = "accountname">Weng Gao</strong>
+          </p>
+        </div> -->
+        <a href="http://geoadaptive.com/">
+          <img id="logo-sel" src="GA_logo_white.png"></img>
+        </a>
+    </div>
+    </nav>
+
+    <div class= "leftcol">
+      <div class="searchbox">
+        <label>Search for country</label>
+        <form action="/action_page.php" autocomplete="on">
+            First name:<input type="text" name="fname"><br>
+            Last name: <input type="text" name="lname"><br>
+            E-mail: <input type="email" name="email" autocomplete="off"><br>
+          <input type="submit">
+        </form>
+
+        <form class="form-inline my-2 my-lg-0" id= "searchbar" autocomplete="on">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchinput">
+          <button class="btn btn-light my-2 my-sm-0" type="submit" id="sbutton-selpage">Search</button>
+        </form>
+      </div>
+      <div class="option" class="leaflet-bar" id="indicatorbar">
+        <label>Available Datasets: </label><br>
+        <select name="basemaps" class="btn btn-light my-2 my-sm-0" id="indicators" onChange="changeBasemap4(this)">
+          <option class = "option" value="">Indicators</option>
+          <option class = "option" value="Paraguay">Education</option>
+          <option class = "option" value="Brazil">Health</option>
+          <option class = "option" value="Brazil">Environment</option>
+          <option class = "option" value="Brazil">Infrastructure</option>
+          <option class = "option" value="Brazil">Poverty</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="middlecol">
+      <div id="introtext">
+        <p>GeoAdaptive's <b>DevelopExplorer</b> enables you to navigate through our development focused open source datasets and gain critical understanding of various development issues across Latin American countries in an easy and interactive way.</p>
+        <br>
+        <br>
+      </div>
+      <div id="results" style="display: none;">
+        <label><b>Country Profile</b></label><br>
+        <p>Name: <span id="countryname">country name</span></p><br>
+        <!-- <p>Area: <span id="countryarea">country area</span></p><br> -->
+        <p>Population: <span id="countrypop">country pop</span></p><br>
+        <p>GDP: <span id="countrygdp">country gdp</span></p><br>
+        <p>GDP per capita: <span id="countrygdpper">country gdp</span></p><br>
+        <!-- <p>Income Level: <span id="countryincome">country income</span></p><br> -->
+        <!-- <p>Gini Index: <span id="countrygini">country gini</span></p> -->
+      </div>
+
+    </div>
+
+    <div id="buttons-sel" class="buttons">
+      <button class="btn btn-dark my-2 my-sm-0" type="button" id="launchbutton" href="mappingpage.html" onclick="javascript:void window.open('mappingpage.html','_blank');return true;" data-toggle="dropdown" aria-haspopup="true">
+        Launch
+      </button>
+      <button class="btn btn-dark my-2 my-sm-0" type="button" id="resetbutton" onclick="javascript:void window.open('featurespage.html','_blank');return true;" data-toggle="dropdown" aria-haspopup="true">
+        Reset
+      </button>
+    </div>
+
+
+
+    <div id="map-selpage"></div>
+
+
+
+    <script src="js/selectionpage.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  </body>
+</html>
