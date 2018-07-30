@@ -11,7 +11,7 @@ document.getElementById("submit").disabled = true;
 function validate(){
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
-  if ( username == "Alex" && password == "GAwhite1"){
+  if ( username == "Jack" && password == "GAwhite1"){
   alert ("Login successfully");
   window.location = "selectionpage.html"; // Redirecting to other page.
   return false;
