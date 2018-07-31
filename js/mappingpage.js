@@ -3334,29 +3334,30 @@ $('#launchbutton-map').click(function(){
 //CONTROL THE REMOVAL OF THE ELEMENTS MAPPED
 $('#resetbutton-map').click(function(){
   console.log("ready to remove");
+
   //REMOVE THE CHECK SIGNS
-  document.getElementById('r1b').style.display = 'none';
-  document.getElementById('r1b').style.visibility = 'none';
-  document.getElementById('r2b').style.display = 'none';
-  document.getElementById('r2b').style.visibility = 'none';
-  document.getElementById('r3b').style.display = 'none';
-  document.getElementById('r3b').style.visibility = 'none';
-  document.getElementById('r4b').style.display = 'none';
-  document.getElementById('r4b').style.visibility = 'none';
-  document.getElementById('r5b').style.display = 'none';
-  document.getElementById('r5b').style.visibility = 'none';
-  document.getElementById('r6b').style.display = 'none';
-  document.getElementById('r6b').style.visibility = 'none';
-  document.getElementById('r7b').style.visibility = 'none';
-  document.getElementById('r7b').style.display = 'none';
-  document.getElementById('r8b').style.visibility = 'none';
-  document.getElementById('r8b').style.display = 'none';
-  document.getElementById('r9b').style.visibility = 'none';
-  document.getElementById('r9b').style.visibility = 'none';
-  document.getElementById('r10b').style.display = 'none';
-  document.getElementById('r10b').style.visibility = 'none';
-  document.getElementById('r11b').style.display = 'none';
-  document.getElementById('r11b').style.visibility = 'none';
+  // document.getElementById('r1b').style.display = 'none';
+  // document.getElementById('r1b').style.visibility = 'none';
+  // document.getElementById('r2b').style.display = 'none';
+  // document.getElementById('r2b').style.visibility = 'none';
+  // document.getElementById('r3b').style.display = 'none';
+  // document.getElementById('r3b').style.visibility = 'none';
+  // document.getElementById('r4b').style.display = 'none';
+  // document.getElementById('r4b').style.visibility = 'none';
+  // document.getElementById('r5b').style.display = 'none';
+  // document.getElementById('r5b').style.visibility = 'none';
+  // document.getElementById('r6b').style.display = 'none';
+  // document.getElementById('r6b').style.visibility = 'none';
+  // document.getElementById('r7b').style.visibility = 'none';
+  // document.getElementById('r7b').style.display = 'none';
+  // document.getElementById('r8b').style.visibility = 'none';
+  // document.getElementById('r8b').style.display = 'none';
+  // document.getElementById('r9b').style.visibility = 'none';
+  // document.getElementById('r9b').style.visibility = 'none';
+  // document.getElementById('r10b').style.display = 'none';
+  // document.getElementById('r10b').style.visibility = 'none';
+  // document.getElementById('r11b').style.display = 'none';
+  // document.getElementById('r11b').style.visibility = 'none';
 
 //REMOVE THE ADM BOUNDARY
 _.each(Country_boundary,function(layer){
