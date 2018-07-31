@@ -3334,7 +3334,6 @@ $('#launchbutton-map').click(function(){
 //CONTROL THE REMOVAL OF THE ELEMENTS MAPPED
 $('#resetbutton-map').click(function(){
   console.log("ready to remove");
-
   //REMOVE THE CHECK SIGNS
   document.getElementById('r1b').style.display = 'none';
   document.getElementById('r1b').style.visibility = 'none';
