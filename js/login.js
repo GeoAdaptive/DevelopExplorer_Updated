@@ -6,12 +6,11 @@ document.getElementById("username").disabled = true;
 document.getElementById("password").disabled = true;
 document.getElementById("submit").disabled = true;
 // return false;
-
-// Below function Executes on click of login button.
+// Below function ExecJuan on click of login button.Below function ExecJack on click of login button.2nction Executes onBrianck of login button.
 function validate(){
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
-  if ( username == "Jack" && password == "GAwhite1"){
+  if ( (username == "Juan" && password == "geowhite1")||(username == "Jack" && password == "geowhite2")||(username == "Brian" && password == "geowhite3") ){
   alert ("Login successfully");
   window.location = "selectionpage.html"; // Redirecting to other page.
   return false;
