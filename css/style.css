@@ -122,12 +122,38 @@ body {
 
 /* For background images to hold the whole full page and not distorted,
 which is essentially crop off the excess part, create a div to hold the image */
+.imgholder1{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  overflow:hidden;
+}
+
+.welcomeimage1 {
+  position:absolute;
+  padding: 0;
+  display: block;
+  /* top:0;
+  left:0; */
+  margin: 0 auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover; */
+  background-size: cover;
+
+  opacity:0.4;
+  filter: grayscale(20%);
+  z-index: 0;
+}
+
 .imgholder{
   position:absolute;
   width:100%;
   height:100%;
   overflow:hidden;
 }
+
 .welcomeimage {
   position:absolute;
   padding: 0;
@@ -994,9 +1020,6 @@ body {
             transform: rotate(-90deg);
         }
 
-
-
-
 #topbuttons-mappage{
   position:absolute;
   /* top:8%; */
@@ -1057,6 +1080,9 @@ body {
 
 .container {
   font-family: 'Source Sans Pro', sans-serif;
+  position: relative;
+  left: 14%;
+  top: 12%;
 }
 
 h1 {
@@ -1349,13 +1375,17 @@ section::after {
   }
   div.main{
   width: 300px;
+  position: relative;
   padding: 10px 50px 25px;
   border: 2px solid gray;
   border-radius: 10px;
+  background-color: #ffffff;
+  /* opacity: 1; */
   font-family: 'Roboto', sans-serif;
   font-weight: lighter;
   float:left;
   margin-top:50px;
+  z-index:10;
   }
   input[type=text],input[type=password]{
   width: 100%;
